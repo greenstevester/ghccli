@@ -9,6 +9,7 @@ import (
 	accessibilityCmd "github.com/cli/cli/v2/pkg/cmd/accessibility"
 	actionsCmd "github.com/cli/cli/v2/pkg/cmd/actions"
 	aliasCmd "github.com/cli/cli/v2/pkg/cmd/alias"
+	analysisCmd "github.com/cli/cli/v2/pkg/cmd/analysis"
 	"github.com/cli/cli/v2/pkg/cmd/alias/shared"
 	apiCmd "github.com/cli/cli/v2/pkg/cmd/api"
 	attestationCmd "github.com/cli/cli/v2/pkg/cmd/attestation"
@@ -127,6 +128,7 @@ func NewCmdRoot(f *cmdutil.Factory, version, buildDate string) (*cobra.Command, 
 	cmd.AddCommand(accessibilityCmd.NewCmdAccessibility(f))
 	cmd.AddCommand(actionsCmd.NewCmdActions(f))
 	cmd.AddCommand(aliasCmd.NewCmdAlias(f))
+	cmd.AddCommand(analysisCmd.NewCmdAnalysis(f))
 	cmd.AddCommand(authCmd.NewCmdAuth(f))
 	cmd.AddCommand(attestationCmd.NewCmdAttestation(f))
 	cmd.AddCommand(configCmd.NewCmdConfig(f))

@@ -99,8 +99,16 @@ func NewFromString(cfgStr string) *ghmock.ConfigMock {
 // in the real implementation, sets the GH_CONFIG_DIR env var so that
 // any call to Write goes to a different location on disk, and then returns
 // the blank config and a function that reads any data written to disk.
+// It also temporarily unsets authentication environment variables to ensure
+// test isolation from the user's real authentication.
 func NewIsolatedTestConfig(t *testing.T) (*cfg, func(io.Writer, io.Writer)) {
 	keyring.MockInit()
+
+	// Unset authentication environment variables to prevent interference with tests
+	// Tests that need these variables should explicitly set them using t.Setenv()
+	t.Setenv("GITHUB_TOKEN", "")
+	t.Setenv("GH_TOKEN", "")
+	t.Setenv("GH_ENTERPRISE_TOKEN", "")
 
 	c := ghConfig.ReadFromString("")
 	cfg := cfg{c}
