@@ -4,7 +4,7 @@
 //
 // Known tasks are:
 //
-//   bin/gh:
+//   bin/gha:
 //     Builds the main executable.
 //     Supported environment variables:
 //     - GH_VERSION: determined from source by default
@@ -38,7 +38,7 @@ import (
 )
 
 var tasks = map[string]func(string) error{
-	"bin/gh": func(exe string) error {
+	"bin/gha": func(exe string) error {
 		info, err := os.Stat(exe)
 		if err == nil && !sourceFilesLaterThan(info.ModTime()) {
 			fmt.Printf("%s: `%s` is up to date.\n", self, exe)
@@ -59,7 +59,7 @@ var tasks = map[string]func(string) error{
 		if buildTags != "" {
 			args = append(args, "-tags", buildTags)
 		}
-		args = append(args, "-ldflags", ldflags, "-o", exe, "./cmd/gh")
+		args = append(args, "-ldflags", ldflags, "-o", exe, "./cmd/gha")
 
 		return run(args...)
 	},

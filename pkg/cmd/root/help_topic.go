@@ -92,18 +92,18 @@ var HelpTopics = []helpTopic{
 			the number of columns available in the current viewport.
 
 			%[1]sGH_NO_UPDATE_NOTIFIER%[1]s: set to any value to disable GitHub CLI update notifications.
-			When any command is executed, gh checks for new versions once every 24 hours.
+			When any command is executed, gha checks for new versions once every 24 hours.
 			If a newer version was found, an upgrade notice is displayed on standard error.
 
 			%[1]sGH_NO_EXTENSION_UPDATE_NOTIFIER%[1]s: set to any value to disable GitHub CLI extension update notifications.
-			When an extension is executed, gh checks for new versions for the executed extension once every 24 hours.
+			When an extension is executed, gha checks for new versions for the executed extension once every 24 hours.
 			If a newer version was found, an upgrade notice is displayed on standard error.
 
-			%[1]sGH_CONFIG_DIR%[1]s: the directory where gh will store configuration files. If not specified,
+			%[1]sGH_CONFIG_DIR%[1]s: the directory where gha will store configuration files. If not specified,
 			the default value will be one of the following paths (in order of precedence):
-			  - %[1]s$XDG_CONFIG_HOME/gh%[1]s (if %[1]s$XDG_CONFIG_HOME%[1]s is set),
+			  - %[1]s$XDG_CONFIG_HOME/gha%[1]s (if %[1]s$XDG_CONFIG_HOME%[1]s is set),
 			  - %[1]s$AppData/GitHub CLI%[1]s (on Windows if %[1]s$AppData%[1]s is set), or
-			  - %[1]s$HOME/.config/gh%[1]s.
+			  - %[1]s$HOME/.config/gha%[1]s.
 
 			%[1]sGH_PROMPT_DISABLED%[1]s: set to any value to disable interactive prompting in the terminal.
 

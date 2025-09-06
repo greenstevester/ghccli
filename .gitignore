@@ -16,7 +16,7 @@
 /build/macOS/resources
 
 # Windows resource files
-/cmd/gh/*.syso
+/cmd/gha/*.syso
 
 # VS Code
 .vscode
@@ -34,3 +34,4 @@
 *~
 
 vendor/
+.claude/

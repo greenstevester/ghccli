@@ -30,7 +30,7 @@ func NewCmdConfig(f *cmdutil.Factory) *cobra.Command {
 
 	cmd := &cobra.Command{
 		Use:   "config <command>",
-		Short: "Manage configuration for gh",
+		Short: "Manage configuration for gha",
 		Long:  longDoc.String(),
 	}
 
