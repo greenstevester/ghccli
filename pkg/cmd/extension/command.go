@@ -35,7 +35,7 @@ func NewCmdExtension(f *cmdutil.Factory) *cobra.Command {
 
 	extCmd := cobra.Command{
 		Use:   "extension",
-		Short: "Manage gh extensions",
+		Short: "Manage gha extensions",
 		Long: heredoc.Docf(`
 			GitHub CLI extensions are repositories that provide additional gh commands.
 

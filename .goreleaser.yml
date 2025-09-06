@@ -1,4 +1,4 @@
-project_name: gh
+project_name: gha
 
 release:
   prerelease: auto
@@ -12,7 +12,7 @@ before:
     - >- # On linux the completions are used in nfpms below, but on macos they are used outside in the deployment build.
       {{ if eq .Runtime.Goos "windows" }}echo{{ end }} make completions
     - >- # We need to create the `.syso` files (per architecture) to embed Windows resources (version info)
-      {{ if ne .Runtime.Goos "windows" }}echo{{ end }} pwsh '.\script\gen-winres.ps1' '{{ .Version }} ({{time "2006-01-02"}})' '{{ .Version }}' '.\script\versioninfo.template.json' '.\cmd\gh\'
+      {{ if ne .Runtime.Goos "windows" }}echo{{ end }} pwsh '.\script\gen-winres.ps1' '{{ .Version }} ({{time "2006-01-02"}})' '{{ .Version }}' '.\script\versioninfo.template.json' '.\cmd\gha\'
 builds:
   - id: macos #build:macos
     goos: [darwin]
@@ -21,8 +21,8 @@ builds:
       post:
         - cmd: ./script/sign '{{ .Path }}'
           output: true
-    binary: bin/gh
-    main: ./cmd/gh
+    binary: bin/gha
+    main: ./cmd/gha
     ldflags:
       - -s -w -X github.com/cli/cli/v2/internal/build.Version={{.Version}} -X github.com/cli/cli/v2/internal/build.Date={{time "2006-01-02"}}
 
@@ -31,8 +31,8 @@ builds:
     goarch: [386, arm, amd64, arm64]
     env:
       - CGO_ENABLED=0
-    binary: bin/gh
-    main: ./cmd/gh
+    binary: bin/gha
+    main: ./cmd/gha
     ldflags:
       - -s -w -X github.com/cli/cli/v2/internal/build.Version={{.Version}} -X github.com/cli/cli/v2/internal/build.Date={{time "2006-01-02"}}
 
@@ -43,33 +43,33 @@ builds:
       post:
         - cmd: pwsh .\script\sign.ps1 '{{ .Path }}'
           output: true
-    binary: bin/gh
-    main: ./cmd/gh
+    binary: bin/gha
+    main: ./cmd/gha
     ldflags:
       - -s -w -X github.com/cli/cli/v2/internal/build.Version={{.Version}} -X github.com/cli/cli/v2/internal/build.Date={{time "2006-01-02"}}
 
 archives:
   - id: linux-archive
     builds: [linux]
-    name_template: "gh_{{ .Version }}_linux_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    name_template: "gha_{{ .Version }}_linux_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
     wrap_in_directory: true
     format: tar.gz
     rlcp: true
     files:
       - LICENSE
-      - ./share/man/man1/gh*.1
+      - ./share/man/man1/gha*.1
   - id: macos-archive
     builds: [macos]
-    name_template: "gh_{{ .Version }}_macOS_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    name_template: "gha_{{ .Version }}_macOS_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
     wrap_in_directory: true
     format: zip
     rlcp: true
     files:
       - LICENSE
-      - ./share/man/man1/gh*.1
+      - ./share/man/man1/gha*.1
   - id: windows-archive
     builds: [windows]
-    name_template: "gh_{{ .Version }}_windows_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+    name_template: "gha_{{ .Version }}_windows_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
     wrap_in_directory: false
     format: zip
     rlcp: true
@@ -88,11 +88,11 @@ nfpms: #build:linux
       - deb
       - rpm
     contents:
-      - src: "./share/man/man1/gh*.1"
+      - src: "./share/man/man1/gha*.1"
         dst: "/usr/share/man/man1"
-      - src: "./share/bash-completion/completions/gh"
-        dst: "/usr/share/bash-completion/completions/gh"
-      - src: "./share/fish/vendor_completions.d/gh.fish"
-        dst: "/usr/share/fish/vendor_completions.d/gh.fish"
-      - src: "./share/zsh/site-functions/_gh"
-        dst: "/usr/share/zsh/site-functions/_gh"
+      - src: "./share/bash-completion/completions/gha"
+        dst: "/usr/share/bash-completion/completions/gha"
+      - src: "./share/fish/vendor_completions.d/gha.fish"
+        dst: "/usr/share/fish/vendor_completions.d/gha.fish"
+      - src: "./share/zsh/site-functions/_gha"
+        dst: "/usr/share/zsh/site-functions/_gha"

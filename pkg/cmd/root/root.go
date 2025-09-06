@@ -9,6 +9,7 @@ import (
 	accessibilityCmd "github.com/cli/cli/v2/pkg/cmd/accessibility"
 	actionsCmd "github.com/cli/cli/v2/pkg/cmd/actions"
 	aliasCmd "github.com/cli/cli/v2/pkg/cmd/alias"
+	analysisCmd "github.com/cli/cli/v2/pkg/cmd/analysis"
 	"github.com/cli/cli/v2/pkg/cmd/alias/shared"
 	apiCmd "github.com/cli/cli/v2/pkg/cmd/api"
 	attestationCmd "github.com/cli/cli/v2/pkg/cmd/attestation"
@@ -61,13 +62,13 @@ func NewCmdRoot(f *cmdutil.Factory, version, buildDate string) (*cobra.Command, 
 	}
 
 	cmd := &cobra.Command{
-		Use:   "gh <command> <subcommand> [flags]",
+		Use:   "gha <command> <subcommand> [flags]",
 		Short: "GitHub CLI",
 		Long:  `Work seamlessly with GitHub from the command line.`,
 		Example: heredoc.Doc(`
-			$ gh issue create
-			$ gh repo clone cli/cli
-			$ gh pr checkout 321
+			$ gha issue create
+			$ gha repo clone cli/cli
+			$ gha pr checkout 321
 		`),
 		Annotations: map[string]string{
 			"versionInfo": versionCmd.Format(version, buildDate),
@@ -77,7 +78,7 @@ func NewCmdRoot(f *cmdutil.Factory, version, buildDate string) (*cobra.Command, 
 			if cmdutil.IsAuthCheckEnabled(cmd) && !cmdutil.CheckAuth(cfg) {
 				parent := cmd.Parent()
 				if parent != nil && parent.Use == "codespace" {
-					fmt.Fprintln(io.ErrOut, "To get started with GitHub CLI, please run:  gh auth login -s codespace")
+					fmt.Fprintln(io.ErrOut, "To get started with GitHub CLI, please run:  gha auth login -s codespace")
 				} else {
 					fmt.Fprint(io.ErrOut, authHelp())
 				}
@@ -127,6 +128,7 @@ func NewCmdRoot(f *cmdutil.Factory, version, buildDate string) (*cobra.Command, 
 	cmd.AddCommand(accessibilityCmd.NewCmdAccessibility(f))
 	cmd.AddCommand(actionsCmd.NewCmdActions(f))
 	cmd.AddCommand(aliasCmd.NewCmdAlias(f))
+	cmd.AddCommand(analysisCmd.NewCmdAnalysis(f))
 	cmd.AddCommand(authCmd.NewCmdAuth(f))
 	cmd.AddCommand(attestationCmd.NewCmdAttestation(f))
 	cmd.AddCommand(configCmd.NewCmdConfig(f))
